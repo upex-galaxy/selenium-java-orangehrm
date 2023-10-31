@@ -82,19 +82,19 @@ public class Locator {
         return this.selenium.findElements(By.cssSelector(selector)); // Specific Class selector
     }
 
-    public WebElement EqualText(String text) {
+    public WebElement ByEqualText(String text) {
         return this.selenium.findElement(By.linkText(text));
     }
 
-    public List<WebElement> EqualTexts(String text) {
+    public List<WebElement> ByEqualTexts(String text) {
         return this.selenium.findElements(By.linkText(text));
     }
 
-    public WebElement ContainText(String text) {
+    public WebElement ByContainText(String text) {
         return this.selenium.findElement(By.partialLinkText(text));
     }
 
-    public List<WebElement> ContainTexts(String text) {
+    public List<WebElement> ByContainTexts(String text) {
         return this.selenium.findElements(By.partialLinkText(text));
     }
 }

@@ -1,0 +1,40 @@
+package e2e.page;
+
+import java.util.function.Supplier;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import e2e.utils.Action;
+import e2e.utils.Locator;
+
+public class LoginPage {
+
+    WebDriver web;
+    Locator get;
+    Action Do;
+    public Supplier<WebElement> usernameInput;
+    public Supplier<WebElement> passwordInput;
+    public Supplier<WebElement> submitButton;
+
+    public LoginPage(WebDriver driver, Locator get, Action Do) {
+        this.web = driver;
+        this.get = get;
+        this.Do = Do;
+        this.usernameInput = () -> this.get.ByName("username");
+        this.passwordInput = () -> this.get.ByName("password");
+        this.submitButton = () -> this.get.Selector("[type=\"submit\"]");
+    }
+
+    public void enterUsername(String textValue) {
+        this.Do.enterValue(this.usernameInput.get(), textValue);
+    }
+
+    public void enterPassword(String textValue) {
+        this.Do.enterValue(this.passwordInput.get(), textValue);
+    }
+
+    public void submitLogin() {
+        this.Do.click(this.submitButton.get());
+    }
+}

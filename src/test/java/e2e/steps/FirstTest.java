@@ -7,13 +7,14 @@ import e2e.fixtures.TestBase;
 public class FirstTest extends TestBase {
 
     @BeforeEach
+    @DisplayName("Given user is in TextBox Page")
     public void precondition() {
-        String endpoint = BASE_URL + "/text-box";
-        web.get(endpoint);
+        web.get("https://demoqa.com/text-box");
     }
 
     @Test
-    public void TC1_submitMessageTest() throws InterruptedException {
+    @DisplayName("TC1: Should submit message")
+    public void TestCase_1() throws InterruptedException {
 
         WebElement fullNameInput = get.ById("userName");
         WebElement emailInput = get.ById("userEmail");
@@ -21,7 +22,7 @@ public class FirstTest extends TestBase {
         WebElement permanentAddressInput = get.ById("permanentAddress");
         WebElement submitButton = get.ById("submit");
 
-        fullNameInput.sendKeys("UPEX Galaxy");
+        Do.enterValue(fullNameInput, "UPEX Galaxy");
         emailInput.sendKeys("upexgalaxy@upex.com");
         currentAddressInput.sendKeys("Chicago");
         permanentAddressInput.sendKeys("U.S.A");

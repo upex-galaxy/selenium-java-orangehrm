@@ -104,7 +104,6 @@
         </dependency>
 
         <!--* test dependencies -->
-
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -118,6 +117,7 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!--* Dependencia para JUnit 5 (JUnit Jupiter) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -133,13 +133,23 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.4.0</version>
         </dependency>
+
+        <!--* Esta Dep suprime los registros y elimina advertencias de SLF4J -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
+        </dependency>
+
+
 
     </dependencies>
 
