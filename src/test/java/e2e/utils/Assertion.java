@@ -23,5 +23,4 @@ public class Assertion {
     public void shouldContain(String actual, String expected) {
         Assertions.assertTrue(actual.contains(expected));
     }
-
 }
