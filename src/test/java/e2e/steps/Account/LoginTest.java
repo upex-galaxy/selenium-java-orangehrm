@@ -14,7 +14,7 @@ public class LoginTest extends TestBase {
     public void login() throws InterruptedException, IOException {
         LoginPage loginPage = new LoginPage(web, get, Do);
         web.get(BASE_URL);
-        Thread.sleep(2000);
+        Thread.sleep(2000); // Temporary
 
         loginPage.enterUsername("Admin");
         loginPage.enterPassword("admin123");
