@@ -2,7 +2,7 @@ package e2e.steps.example;
 
 import org.junit.jupiter.api.Test;
 
-public class juanemTest {
+public class JuanemTest {
     static class FuturoAutomata {
         public String name;
         public int num1;
