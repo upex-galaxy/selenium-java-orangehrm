@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 // Guardar cambios, git add, git commit, y git push => y abrir Pull Request.
 
 public class DairoTest { // Mision 1:
-    Integer numeroUno = new Random().nextInt(100);
-    Double numeroDos = new Random().nextDouble() * 100;
+    int numeroUno = new Random().nextInt(100);
+    double numeroDos = new Random().nextDouble() * 100;
     public static final String nombre = "Dairo";
     public static final String apellido = "Estrada";
 
