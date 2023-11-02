@@ -1,6 +1,6 @@
 {
 	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "Andromeda Italic",
+	"workbench.colorTheme": "Night Owl",
 	"workbench.iconTheme": "vscode-icons",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
@@ -74,5 +74,5 @@
 	"java.configuration.updateBuildConfiguration": "interactive",
 	"java.compile.nullAnalysis.mode": "automatic",
 	"maven.terminal.useJavaHome": true,
-	"cSpell.words": ["lastname"]
+	"cSpell.words": ["lastname", "Mileidi"]
 }
