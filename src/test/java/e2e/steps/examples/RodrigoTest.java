@@ -14,7 +14,7 @@ public class RodrigoTest {
     }
 
     @Test
-    public void challengeGit() {
+    public void challengeJava() {
 
         RodrigoTest rodrigoTest = new RodrigoTest();
 
