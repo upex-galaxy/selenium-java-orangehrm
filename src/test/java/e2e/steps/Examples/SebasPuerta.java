@@ -23,6 +23,8 @@ public class SebasPuerta {
 
         getName(firstname, lastname);
 
+        System.out.println("¡Saludos UPEX!");
+        
     }
 
 }
