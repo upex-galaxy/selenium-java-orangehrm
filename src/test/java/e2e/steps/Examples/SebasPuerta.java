@@ -1,4 +1,5 @@
 package e2e.steps.Examples;
+import org.junit.jupiter.api.*;
 
 public class SebasPuerta {
 
@@ -11,7 +12,8 @@ public class SebasPuerta {
         System.out.println("My name is: " + firstname + " " + lastname);
     }
 
-    public static void main(String[] args) {
+    @Test
+    public static void challengeGit() {
         int num1 = 5;
         double num2 = 7.5;
 
@@ -24,7 +26,7 @@ public class SebasPuerta {
         getName(firstname, lastname);
 
         System.out.println("¡Saludos UPEX!");
-        
+
     }
 
 }
