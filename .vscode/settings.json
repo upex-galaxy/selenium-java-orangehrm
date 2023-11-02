@@ -1,6 +1,6 @@
 {
 	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "SLab Special : Andromeda Italic Edition",
+	"workbench.colorTheme": "Andromeda Italic",
 	"workbench.iconTheme": "vscode-icons",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
