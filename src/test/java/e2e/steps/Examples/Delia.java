@@ -6,7 +6,7 @@ public class Delia {
 
     String Nombre = "Delia";
     String Apellido = "Cardenas";
-    int primer_Numero = 10;
+    int primer_Numero = 11;
     double Segundo_Numero = 5.34;
 
     @Test
