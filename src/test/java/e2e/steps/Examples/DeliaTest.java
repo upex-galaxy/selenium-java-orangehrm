@@ -2,7 +2,7 @@ package e2e.steps.Examples;
 
 import org.junit.Test;
 
-public class Delia {
+public class DeliaTest {
 
     String Nombre = "Delia";
     String Apellido = "Cardenas";
