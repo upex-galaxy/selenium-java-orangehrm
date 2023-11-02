@@ -1,4 +1,5 @@
 package e2e.steps.examples;
+import org.junit.jupiter.api.*;
 
 public class RodrigoTest {
 
@@ -12,7 +13,8 @@ public class RodrigoTest {
        return mision2;
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void challengeGit() {
 
         RodrigoTest rodrigoTest = new RodrigoTest();
 
@@ -30,5 +32,4 @@ public class RodrigoTest {
         System.out.println("Mi nombre es: " + fullName );
 
     }
-
 }
