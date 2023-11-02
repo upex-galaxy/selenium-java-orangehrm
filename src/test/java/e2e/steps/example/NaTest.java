@@ -1,7 +1,10 @@
 package e2e.steps.example;
 
+import org.junit.jupiter.api.*;
+
 public class NaTest {
-    public static void main(String[] args) {
+    @Test
+    public void practicandoGit() {
         int n1 = 10;
         double n2 = 20.59;
         String name = "Nathalie";
