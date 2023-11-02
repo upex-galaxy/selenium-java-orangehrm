@@ -1,4 +1,4 @@
-package e2e.steps.example;
+package e2e.steps.examples;
 
 public class ElyTest {
 
