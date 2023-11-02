@@ -12,13 +12,21 @@ public class LauTest {
     public static final String cadena2 = "Mundo!";
 
     // Crear un Método para hacer eso.
-    // Imprimir los resultados en la Consola con System.out.print.
-    @Test
-    public void metodo() {
-        String s = cadena1 + cadena2;
-        Double res = numero1 + numero2;
-        System.out.println(s);// Sachin Tendulkar
-        System.out.println(res);// Sachin Tendulkar
+    public Double addNumbers(Integer num1, Double num2) {
+        return num1 + num2;
     }
 
+    public String concatStrings(String word1, String word2) {
+        return word1 + word2;
+    }
+
+    // Imprimir los resultados en la Consola con System.out.print.
+    @Test
+    public void ImprimirResultador() {
+        String nuevaCadena = cadena1 + cadena2;
+        Double res = numero1 + numero2;
+        System.out
+                .println(String.format("las palabras son %s y %s ,juntas forman: %s.", cadena1, cadena2, nuevaCadena));
+        System.out.println(String.format("La sume de %d + %.3f = %.3f", numero1, numero2, res));
+    }
 }
