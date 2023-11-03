@@ -8,9 +8,9 @@ public class LorenaTest {
     public static float numeroDecimal = 3.14f; // Variable de tipo float
     public static float resultado = numeroEntero + numeroDecimal;
 
-    public static final String saludo = "Hola Saites";
-    public static final String proposito = ", espero aprender Selenium";
-    public static final String mostrar = saludo + proposito;
+    public static final String nombre = "Lorena";
+    public static final String apellido = " Tamayo";
+    public static final String mostrar = nombre + apellido;
 
     @Test
     public void muestrate() {
