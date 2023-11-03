@@ -82,19 +82,41 @@ public class Locator {
         return this.selenium.findElements(By.cssSelector(selector)); // Specific Class selector
     }
 
-    public WebElement ByEqualText(String text) {
-        return this.selenium.findElement(By.linkText(text));
+    public WebElement ByEqualText(String tag, String givenText) {
+        String elementToFind = String.format("//%s[text()=\"%s\"]", tag, givenText);
+        return this.selenium.findElement(By.xpath(elementToFind));
     }
 
-    public List<WebElement> ByEqualTexts(String text) {
-        return this.selenium.findElements(By.linkText(text));
+    public List<WebElement> ByEqualTexts(String tag, String givenText) {
+        String elementToFind = String.format("//%s[text()=\"%s\"]", tag, givenText);
+        return this.selenium.findElements(By.xpath(elementToFind));
     }
 
-    public WebElement ByContainText(String text) {
-        return this.selenium.findElement(By.partialLinkText(text));
+    public WebElement ByContainText(String tag, String givenText) {
+        String elementToFind = String.format("//%s[contains(text(),\"%s\")]", tag, givenText);
+        return this.selenium.findElement(By.xpath(elementToFind));
     }
 
-    public List<WebElement> ByContainTexts(String text) {
-        return this.selenium.findElements(By.partialLinkText(text));
+    public List<WebElement> ByContainTexts(String givenText) {
+        return this.selenium.findElements(By.partialLinkText(givenText));
+    }
+
+    public WebElement withinElement(WebElement parent, String withinElement) {
+        return parent.findElement(By.cssSelector(withinElement));
+    }
+
+    public WebElement withinTextElement(WebElement parent, String tag, String givenText) {
+        String xpath = String.format("//%s[text()=\"%s\"]", tag, givenText);
+        return parent.findElement(By.xpath(xpath));
+    }
+
+    public WebElement filterByElement(String givenElement, String selectorFilter) {
+        String locator = String.format("%s:has(%s)", givenElement, selectorFilter);
+        return this.selenium.findElement(By.cssSelector(locator));
+    }
+
+    public WebElement filterByNotElement(String givenElement, String selectorFilter) {
+        String locator = String.format("%s:not(%s)", givenElement, selectorFilter);
+        return this.selenium.findElement(By.cssSelector(locator));
     }
 }
