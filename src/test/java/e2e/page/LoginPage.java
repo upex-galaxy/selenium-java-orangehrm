@@ -2,12 +2,11 @@ package e2e.page;
 
 import java.io.IOException;
 import java.util.function.Supplier;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import e2e.utils.Action;
 import e2e.utils.Locator;
+import e2e.fixtures.TestBase;
 
 public class LoginPage {
 
@@ -38,5 +37,15 @@ public class LoginPage {
     public void submitLogin() throws InterruptedException, IOException {
         this.Do.click(this.submitButton.get());
         Thread.sleep(1000);
+    }
+
+    // * Shortcut
+    public void login() throws InterruptedException, IOException {
+        web.get(TestBase.BASE_URL);
+        Thread.sleep(1000);
+
+        this.enterUsername("Admin");
+        this.enterPassword("admin123");
+        this.submitLogin();
     }
 }
