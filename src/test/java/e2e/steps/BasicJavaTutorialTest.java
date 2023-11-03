@@ -1,11 +1,6 @@
 package e2e.steps;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.junit.jupiter.api.*;
 
 public class BasicJavaTutorialTest {
@@ -13,6 +8,10 @@ public class BasicJavaTutorialTest {
     // Todo: ESTO ES UN EJEMPLO DE UNA VARIABLE DECLARADA (con muchas
     // modificaciones):
     public static final String EXAMPLE_VARIABLE = "This is an example variable.";
+    // name = "Sai"
+    // const name = "Sai" | let name = "" | var name = "Sai"
+    // const name: string = "Sai" | let name = "" | var name = "Sai"
+    // String name = "Sai"
 
     // Todo: Modificadores de Acceso:
     // * <public/private/protected/default>
@@ -55,7 +54,7 @@ public class BasicJavaTutorialTest {
     // Todo: */ String:
     // * Es una clase que representa secuencias de caracteres. Similar al "string"
     // en JavaScript.
-    public static final String sampleString = "Hello, World!";
+    public static final String sampleString = "Hello, \"World\"!";
 
     // Todo: */ Integer y Double:
     // * Estas son clases envolventes (wrapper classes) para los tipos primitivos
@@ -72,6 +71,7 @@ public class BasicJavaTutorialTest {
     // Todo: */ List (parecido al Array en JavaScript):
     // * Es una interfaz que representa una colección ordenada. La implementación
     // más común es ArrayList.
+    // const bookList: Array<string> = ["A", "B", "C"]
     public static final List<String> sampleList = new ArrayList<>(Arrays.asList("one", "two", "three"));
 
     // Todo: */ Map (parecido al Object en JavaScript en términos de pares
@@ -81,6 +81,12 @@ public class BasicJavaTutorialTest {
     static {
         sampleMap.put("one", 1);
         sampleMap.put("two", 2);
+    }
+
+    public String getName() {
+        String name = "Sai";
+        String password = "galaxy";
+        return name + " is on " + password;
     }
 
     @Test
@@ -98,5 +104,7 @@ public class BasicJavaTutorialTest {
         System.out.println(sampleList);
         System.out.print("OBJECT-MAP:");
         System.out.println(sampleMap);
+        String givenName = getName();
+        System.out.print(givenName);
     }
 }
