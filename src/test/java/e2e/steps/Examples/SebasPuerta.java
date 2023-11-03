@@ -1,5 +1,7 @@
 package e2e.steps.Examples;
 
+import org.junit.jupiter.api.*;
+
 public class SebasPuerta {
 
     public static double getSum(int num1, double num2) {
@@ -11,7 +13,8 @@ public class SebasPuerta {
         System.out.println("My name is: " + firstname + " " + lastname);
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void challengeGit() {
         int num1 = 5;
         double num2 = 7.5;
 
@@ -22,6 +25,8 @@ public class SebasPuerta {
         String lastname = "Puerta";
 
         getName(firstname, lastname);
+
+        System.out.println("¡Saludos UPEX!");
 
     }
 
