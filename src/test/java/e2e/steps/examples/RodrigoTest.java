@@ -1,4 +1,4 @@
-package e2e.steps.Examples;
+package e2e.steps.examples;
 
 import org.junit.jupiter.api.*;
 
