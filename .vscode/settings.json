@@ -74,5 +74,5 @@
 	"java.configuration.updateBuildConfiguration": "interactive",
 	"java.compile.nullAnalysis.mode": "automatic",
 	"maven.terminal.useJavaHome": true,
-	"java.debug.settings.onBuildFailureProceed": true
+"cSpell.words": ["lastname"]
 }
