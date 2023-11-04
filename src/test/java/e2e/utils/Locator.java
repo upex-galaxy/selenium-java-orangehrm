@@ -111,8 +111,18 @@ public class Locator {
         return parent.findElement(By.cssSelector(target_selector));
     }
 
+    public List<WebElement> WithinElements(WebElement parent, String target_selector) {
+        return parent.findElements(By.cssSelector(target_selector));
+    }
+
     public WebElement WithinTextElement(String parent_attr, String target_text) {
         String locator = String.format("//*[@%s]//*[contains(text(),\"%s\")]", parent_attr, target_text);
+        return this.selenium.findElement(By.xpath(locator));
+    }
+
+    public WebElement FilterByText(String filter_text, Integer parent_target) {
+        String index = Integer.toString(parent_target);
+        String locator = String.format("//*[text()=\"%s\"]/ancestor::*[%s]", filter_text, index);
         return this.selenium.findElement(By.xpath(locator));
     }
 
