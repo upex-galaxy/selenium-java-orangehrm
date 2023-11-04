@@ -52,6 +52,16 @@ public class AddUserTest extends TestBase {
         }
     }
 
+    static class User {
+        String username;
+        String pw;
+
+        public User(String username, String pw) {
+            this.username = username;
+            this.pw = pw;
+        }
+    }
+
     @Test
     @DisplayName("GX3-185 | TC1: Add a user successfully")
     public void addUserSuccessfully() throws InterruptedException, IOException {
@@ -107,26 +117,29 @@ public class AddUserTest extends TestBase {
         then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
 
         UserManagementPage ump = new UserManagementPage(web,get,Do);
-        String response = ump.createUserWithData("BlackHol15d23", "A3b!7xZ*9qP", givenEmployeeNameValue, givenUserStatusValue);
+        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, givenEmployeeNameValue, givenUserStatusValue);
         then.shouldBeEqual(response, "Successfully Saved");
         System.out.println("Response: " + response);
         Thread.sleep(4000);
         then.shouldContain(web.getCurrentUrl(), "admin/viewSystemUsers");
 
-        ump.userSearch("BlackHol15d23");
+        ump.userSearch(newUser.username);
         Thread.sleep(4000);
 
         List<WebElement> card = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
         WebElement employeeSearch = card.get(0);
         List<WebElement> data2 = get.WithinElement(employeeSearch, rowData);
-        then.shouldBeEqual(data2.get(1).getText(), "BlackHol15d23");
+        then.shouldBeEqual(data2.get(1).getText(), newUser.username);
+        System.out.println("Usuario encontrado: " + data2.get(1).getText() + " Usuario insertado: " + newUser.username);
 
     }
 
     @Test
     @DisplayName("GX3-185 | TC2: Try to insert a invalid user")
     public void insertInvalidUserData(){
-        
+
     }
 
 
