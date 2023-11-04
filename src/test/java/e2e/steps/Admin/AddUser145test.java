@@ -50,4 +50,19 @@ public class AddUser145test {
         String actualURL = web.getCurrentUrl();
         then.shouldContain(actualURL, "/dashboard/index");
     }
+
+    // TC2
+    @Test
+    @DisplayName("TC2: Should login unsuccessfully")
+    public void loginUnsuccessfully() throws InterruptedException, IOException {
+        LoginPage loginPage = new LoginPage(web, get, Do);
+        web.get(BASE_URL);
+        Thread.sleep(1000); // Temporary
+
+        loginPage.enterUsername("UsuarioIncorrecto");
+        loginPage.enterPassword("ContraseñaIncorrecta");
+        loginPage.submitLogin();
+        String actualURL = web.getCurrentUrl();
+        then.shouldContain(actualURL, "/auth/validateCredentials");
+    }
 }
