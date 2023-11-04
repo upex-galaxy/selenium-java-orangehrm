@@ -28,4 +28,3 @@ jobs:
 
             - name: 🧪Run Selenium tests
               run: mvn clean verify -Dit.test=DairoTest -Dheadless=true
-

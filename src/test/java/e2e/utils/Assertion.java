@@ -1,10 +1,15 @@
 package e2e.utils;
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.WebElement;
 
 public class Assertion {
 
     public void shouldBeEqual(String actual, String expected) {
+        Assertions.assertEquals(actual, expected);
+    }
+
+    public void shouldBeEqualInt(Integer actual, Integer expected) {
         Assertions.assertEquals(actual, expected);
     }
 
@@ -22,5 +27,9 @@ public class Assertion {
 
     public void shouldContain(String actual, String expected) {
         Assertions.assertTrue(actual.contains(expected));
+    }
+
+    public void shouldBeVisible(WebElement locator) {
+        Assertions.assertTrue(locator.isDisplayed());
     }
 }
