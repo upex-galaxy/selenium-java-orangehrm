@@ -31,19 +31,39 @@ public class AddUser142Test extends TestBase {
         // todo: Given existe Data disponible en la lista de Empleados...
         List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
         Integer availableEmployees = cards.size();
-        System.out.println(availableEmployees);
         Integer randomSelection = new Random().nextInt(availableEmployees);
         WebElement givenEmployee = cards.get(randomSelection);
         then.shouldBeVisible(givenEmployee);
-        System.out.println(givenEmployee);
 
-        List<WebElement> data = get.WithinElement(givenEmployee, "[role=\"cell\"]>div");
-        System.out.print(data.size());
-        then.shouldBeEqualInt(data.size(), 6);
-        String givenUsernameValue = data.get(1).getText();
-        String givenUserRoleValue = data.get(2).getText();
-        String givenEmployeeNameValue = data.get(3).getText();
-        String givenUserStatusValue = data.get(4).getText();
+        // Esto corre únicamente cuando se ejecuta por headless:
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        Integer expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+
         System.out.println("givenUsername:");
         System.out.println(givenUsernameValue);
         System.out.println("givenUserRole:");
@@ -62,7 +82,7 @@ public class AddUser142Test extends TestBase {
         // todo: And el admin llena los campos requeridos
         WebElement userRoleDropdown = get.FilterByText("User Role", 2);
         Do.click(userRoleDropdown);
-        WebElement roleOption = get.WithinTextElement("role=\"option\"", givenUserRoleValue);
+        WebElement roleOption = get.WithinTextElement("role=\"option\"", "Admin");
         Do.click(roleOption);
 
         WebElement statusDropdown = get.FilterByText("Status", 2);
@@ -89,7 +109,6 @@ public class AddUser142Test extends TestBase {
         // todo: And hace click al botón "Save"
         // WebElement saveButton = get.WithinTextElement("type=\"submit\"", "Save");
         // Do.click(saveButton);
-
         // todo: Then deberia aparecer un mensaje indicando "Sucess, Succesfully Saved"
         // todo: And el admin deberia ser redirigido a la página anterior
         // todo: And debería ser agregado el nuevo usuario en la lista "Records Found"
