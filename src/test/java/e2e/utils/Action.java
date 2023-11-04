@@ -3,6 +3,8 @@ package e2e.utils;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.function.Supplier;
+
 import org.openqa.selenium.Keys;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
