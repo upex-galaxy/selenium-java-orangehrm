@@ -3,7 +3,7 @@ package e2e.utils;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-
+import org.openqa.selenium.Keys;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -23,8 +23,8 @@ public class Action {
         this.action = new Actions(this.web);
     }
 
-    public void enterValue(WebElement locator, String textValue) {
-        action.sendKeys(locator, textValue).perform();
+    public void enterValue(WebElement locator, String value) {
+        action.sendKeys(locator, value).perform();
     }
 
     public void click(WebElement locator) {
@@ -38,6 +38,19 @@ public class Action {
     public void rightClick(WebElement locator) {
         action.contextClick(locator).perform();
     }
+
+    // *---- KEYBOARD ---- */
+    public void pressKeyDown() throws IOException {
+        action.keyDown(Keys.ARROW_DOWN).perform();
+        action.keyUp(Keys.ARROW_DOWN).perform();
+    }
+
+    public void pressEnter() throws IOException {
+        action.keyDown(Keys.ENTER).perform();
+        action.keyUp(Keys.ENTER).perform();
+    }
+
+    // *---- SCREENSHOTS---- */
 
     public void screenshot() throws IOException {
         File scrFile = ((TakesScreenshot) this.web).getScreenshotAs(OutputType.FILE);
