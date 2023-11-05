@@ -18,7 +18,7 @@ public class LoginPage {
     public Supplier<WebElement> passwordInput;
     public Supplier<WebElement> submitButton;
 
-    public LoginPage(WebDriver driver, Locator get, Action Do) {
+    public void Page(WebDriver driver, Locator get, Action Do) {
         this.web = driver;
         this.get = get;
         this.Do = Do;
