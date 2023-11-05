@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
+
 public class GX34835postAVideoByUrlTest extends TestBase {
+
 
     @BeforeEach
     @DisplayName("41778 | OrangeHRM | Buzz | Post a Video by URL")
@@ -26,11 +28,12 @@ public class GX34835postAVideoByUrlTest extends TestBase {
     @Test
     @DisplayName("TC1: Validar publicar un video mediante URL")
     public void TestCase1() throws InterruptedException {
+        
         WebElement buttonBuzz = get.Selector("[href='/web/index.php/buzz/viewBuzz']");
         buttonBuzz.click();
 
-        WebElement titleBuzz = get.Xpath("//button[text()=' Post ']");
-        String value = titleBuzz.getText();
+        WebElement titlePost = get.Xpath("//button[text()=' Post ']");
+        String value = titlePost.getText();
         System.out.println(value);
         then.shouldBeEqual(value, "Post");
 
@@ -39,13 +42,13 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         buttonPost.click();
         /*
          * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         */ // con xpath selector
-        WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-        String titleshare = titlePost.getText();
-        System.out.println(titleshare);
-        then.shouldBeEqual(titleshare, "Share Video");
-        Thread.sleep(2000);
-        /*
+         * // con xpath selector
+         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
+         * String titleshare = titlePost.getText();
+         * System.out.println(titleshare);
+         * then.shouldBeEqual(titleshare, "Share Video");
+         * Thread.sleep(2000);
+         * /*
          * WebElement titleUrl = get.Selector("label.oxd-label");
          * String titleshare = titleUrl.getText();
          * System.out.println(titleshare);
@@ -84,13 +87,13 @@ public class GX34835postAVideoByUrlTest extends TestBase {
 
         /*
          * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         */ // con xpath selector
-        WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-        String titleshare = titlePost.getText();
-        System.out.println(titleshare);
-        then.shouldBeEqual(titleshare, "Share Video");
-        Thread.sleep(2000);
-        /*
+         * // con xpath selector
+         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
+         * String titleshare = titlePost.getText();
+         * System.out.println(titleshare);
+         * then.shouldBeEqual(titleshare, "Share Video");
+         * Thread.sleep(2000);
+         * /*
          * WebElement titleUrl = get.Selector("label.oxd-label");
          * String titleshare = titleUrl.getText();
          * System.out.println(titleshare);
@@ -130,13 +133,13 @@ public class GX34835postAVideoByUrlTest extends TestBase {
 
         /*
          * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         */ // con xpath selector
-        WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-        String titleshare = titlePost.getText();
-        System.out.println(titleshare);
-        then.shouldBeEqual(titleshare, "Share Video");
-        Thread.sleep(2000);
-        /*
+         * // con xpath selector
+         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
+         * String titleshare = titlePost.getText();
+         * System.out.println(titleshare);
+         * then.shouldBeEqual(titleshare, "Share Video");
+         * Thread.sleep(2000);
+         * /*
          * WebElement titleUrl = get.Selector("label.oxd-label");
          * String titleshare = titleUrl.getText();
          * System.out.println(titleshare);
