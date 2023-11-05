@@ -1,4 +1,5 @@
-package e2e.steps.Examples;
+package e2e.steps.examples;
+
 import org.junit.jupiter.api.*;
 
 public class SebasPuerta {
@@ -13,7 +14,7 @@ public class SebasPuerta {
     }
 
     @Test
-    public static void challengeGit() {
+    public void challengeGit() {
         int num1 = 5;
         double num2 = 7.5;
 
