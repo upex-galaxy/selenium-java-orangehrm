@@ -136,6 +136,12 @@ public class Locator {
         return this.selenium.findElement(By.xpath(locator));
     }
 
+    public WebElement FilterByTextChild(String filter_text, Integer parent_target, String attr) {
+        String index = Integer.toString(parent_target);
+        String locator = String.format("//*[text()=\"%s\"]/ancestor::*[%s] /%s", filter_text, index, attr);
+        return this.selenium.findElement(By.xpath(locator));
+    }
+
     public List<WebElement> FilterByElement(String target_selector, String filter_selector) {
         String locator = String.format("%s:has(%s)", target_selector, filter_selector);
         return this.selenium.findElements(By.cssSelector(locator));

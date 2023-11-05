@@ -13,34 +13,10 @@ import java.util.List;
 import java.util.Random;
 
 public class AddUserTest extends TestBase {
-    /*
-    Feature: Admin | Add User
-
-    Background:
-    Given el admin esta logueado en el sistema
-    * se ubica en el modulo Admin > User Management - HECHO
-    * existe un empleado al que agregarle credenciales - HECHO
-
-    Scenario 1: el administrador agrega un usuario con éxito - HECHO
-    When el admin hace click en el botón "Add" - HECHO
-    And el admin llena los campos requeridos - HECHO
-    And hace click al botón "Save" - HECHO
-    Then deberia aparecer un mensaje amistoso indicando "Sucess, Succesfully Saved" - HECHO
-    And el admin deberia ser redirigido a la página con la lista de los usuarios del sistema - HECHO
-    And debería ser agregado el nuevo usuario en la lista "Records Found" - HECHO
-
-    Scenario 2: el administrador no puede agregar un usuario
-    When el admin hace click en el botón "Add"
-    And el admin llena los campos requeridos con data inválida
-    Then debería aparecer un mensaje de error por campo con datos inválidos
-    And el botón "Save" no hará nada
-
-    */
-
     @BeforeEach
     @DisplayName("Precondition: User most be logged in")
     public void login() throws IOException, InterruptedException {
-        LoginPage loginPage = new LoginPage(web,get,Do);
+        LoginPage loginPage = new LoginPage(web, get, Do);
         try {
             loginPage.login();
             WebElement adminTab = get.ByEqualText("Admin");
@@ -68,8 +44,8 @@ public class AddUserTest extends TestBase {
 
         // todo: Given existe Data disponible en la lista de Empleados...
         List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
-        Integer availableEmployees = cards.size();
-        Integer randomSelection = new Random().nextInt(availableEmployees);
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
         WebElement givenEmployee = cards.get(randomSelection);
         then.shouldBeVisible(givenEmployee);
 
@@ -78,7 +54,7 @@ public class AddUserTest extends TestBase {
         String givenUserRoleValue;
         String givenEmployeeNameValue;
         String givenUserStatusValue;
-        Integer expectedSize;
+        int expectedSize;
         String rowData;
         String headlessValue = System.getProperty("headless");
         if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
@@ -116,10 +92,11 @@ public class AddUserTest extends TestBase {
         Thread.sleep(1000);
         then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
 
-        UserManagementPage ump = new UserManagementPage(web,get,Do);
-        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("Black4235", "A3b!7xZ*9qP");
 
-        String response = ump.createUserWithData(newUser.username, newUser.pw, givenEmployeeNameValue, givenUserStatusValue);
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue,
+                givenUserStatusValue, true, true, true, true, true);
         then.shouldBeEqual(response, "Successfully Saved");
         System.out.println("Response: " + response);
         Thread.sleep(4000);
@@ -137,10 +114,672 @@ public class AddUserTest extends TestBase {
     }
 
     @Test
-    @DisplayName("GX3-185 | TC2: Try to insert a invalid user")
-    public void insertInvalidUserData(){
+    @DisplayName("GX3-185 | TC2: Try to save a invalid user with empty user role")
+    public void insertEmptyUserRole() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web,get,Do);
+        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                false, true, true, true, true);
+        then.shouldBeEqual(response, "Required");
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC3: Try to save a invalid user with empty employee name")
+    public void insertEmptyEmployeeName() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web,get,Do);
+        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, "empty", givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Required");
+        System.out.println("Response: " + response);
 
     }
 
+    @Test
+    @DisplayName("GX3-185 | TC4: Try to save a invalid user with empty status")
+    public void insertEmptyStatus() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
 
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web,get,Do);
+        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, false, true, true, true);
+        then.shouldBeEqual(response, "Required");
+    }
+
+    @Test
+    @DisplayName("GX3-185 | TC5: Try to save a invalid user with empty username")
+    public void insertEmptyUsername() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHo23", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, true, false, true, true);
+        then.shouldBeEqual(response, "Required");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC6: Try to save a invalid user with 4 characters")
+    public void insertInvalidUsername() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("Blan", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Should be at least 5 characters");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC7: Try to save a invalid user with 41 characters")
+    public void insertInvalidUsername41Char() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("JuanEusebioMoralesNeumannEusebioMoralesNe", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Should not exceed 40 characters");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC8: Try to save a invalid user with empty password")
+    public void insertEmptyPassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol15dc423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, false, true);
+        then.shouldBeEqual(response, "Required");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC9: Try to save a invalid user with empty repassword")
+    public void insertEmptyRePassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, newUser.pw, givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, false);
+        then.shouldBeEqual(response, "Required");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC10: Try to save a invalid user with different password")
+    public void insertDifferentPassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "A3b!7xZ*9qP");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, "A3b!7xZ*9qPs", givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Passwords do not match");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC11: Try to save a invalid user with a short password")
+    public void insertShortPassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "a");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, "a", givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Should have at least 7 characters");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC12: Try to save a invalid user with a long password")
+    public void insertLongPassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "JuanEusebioMoralesNeumannEusebioMoralesNe213213123213122323232322");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, "JuanEusebioMoralesNeumannEusebioMoralesNe213213123213122323232322", givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Should not exceed 64 characters");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC13: Try to save a invalid user with password only string")
+    public void insertOnlyStringPassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "JuanEusebioMoralesNeumannEusbioMoralesJuanEusebioMoralesNeumannE");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, "JuanEuebioMoralesNeumannEusebioMoralesJuanEusebioMoralesNeumannE", givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Your password must contain minimum 1 number");
+    }
+    @Test
+    @DisplayName("GX3-185 | TC14: Try to save a invalid user with password only uppercase")
+    public void insertOnlyUpperCasePassword() throws InterruptedException, IOException {
+        //get user by Employee List
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        int availableEmployees = cards.size();
+        int randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+
+        String givenUsernameValue;
+        String givenUserRoleValue;
+        String givenEmployeeNameValue;
+        String givenUserStatusValue;
+        int expectedSize;
+        String rowData;
+        String headlessValue = System.getProperty("headless");
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
+        } else {
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            givenUsernameValue = data.get(0).getText();
+            givenUserRoleValue = data.get(1).getText();
+            givenEmployeeNameValue = data.get(2).getText();
+            givenUserStatusValue = data.get(3).getText();
+        } else {
+            givenUsernameValue = data.get(1).getText();
+            givenUserRoleValue = data.get(2).getText();
+            givenEmployeeNameValue = data.get(3).getText();
+            givenUserStatusValue = data.get(4).getText();
+        }
+        //change window
+        WebElement addButton = get.ByEqualText(" Add ");
+        Do.click(addButton);
+        Thread.sleep(1000);
+        then.shouldContain(web.getCurrentUrl(), "admin/saveSystemUser");
+
+        //create necessary objects
+        UserManagementPage ump = new UserManagementPage(web, get, Do);
+        User newUser = new User("BlackHol423", "TTTTTTT");
+
+        String response = ump.createUserWithData(newUser.username, newUser.pw, "TTTTTTT", givenEmployeeNameValue, givenUserStatusValue,
+                true, true, true, true, true);
+        then.shouldBeEqual(response, "Your password must contain minimum 1 lower-case letter");
+    }
 }
