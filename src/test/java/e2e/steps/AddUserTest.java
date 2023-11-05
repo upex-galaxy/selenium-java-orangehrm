@@ -41,7 +41,7 @@ public class AddUserTest extends TestBase {
     @Test
     @DisplayName("GX3-185 | TC1: Add a user successfully")
     public void addUserSuccessfully() throws InterruptedException, IOException {
-
+        Thread.sleep(1000);
         // todo: Given existe Data disponible en la lista de Empleados...
         List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
         int availableEmployees = cards.size();
