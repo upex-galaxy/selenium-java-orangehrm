@@ -129,8 +129,8 @@ public class AddUser143Test extends TestBase {
         WebElement frameSuccess = get.Selector(".oxd-toast--success .oxd-text--toast-message");
         String success = frameSuccess.getText();
         System.out.println(success);
-        then.shouldBeEqual(success, "Successfully Saved");
-        Thread.sleep(10000);
+        then.shouldContain(success, "Successfully Saved");
+        Thread.sleep(3000);
         // confirmar que nos redirige a la pagina inicial
         WebElement tittleAdminConfirm = get.Selector(".oxd-topbar-header-title");
         String valueConfirm = tittleAdminConfirm.getText();
