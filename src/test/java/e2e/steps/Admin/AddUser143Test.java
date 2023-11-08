@@ -1,11 +1,9 @@
 package e2e.steps.Admin;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
