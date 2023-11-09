@@ -48,6 +48,16 @@ public class Locator {
         return this.selenium.findElements(By.id(id));
     }
 
+    public WebElement ByRole(String role) {
+        String roleAttr = String.format("[role=\"%s\"]", role);
+        return this.selenium.findElement(By.cssSelector(roleAttr));
+    }
+
+    public List<WebElement> ByRoles(String role) {
+        String roleAttr = String.format("[role=\"%s\"]", role);
+        return this.selenium.findElements(By.cssSelector(roleAttr));
+    }
+
     public WebElement ByName(String name) {
         return this.selenium.findElement(By.name(name));
     }
@@ -83,18 +93,56 @@ public class Locator {
     }
 
     public WebElement ByEqualText(String text) {
-        return this.selenium.findElement(By.linkText(text));
+        String elementToFind = String.format("//*[text()=\"%s\"]", text);
+        return this.selenium.findElement(By.xpath(elementToFind));
     }
 
     public List<WebElement> ByEqualTexts(String text) {
-        return this.selenium.findElements(By.linkText(text));
+        String elementToFind = String.format("//*[text()=\"%s\"]", text);
+        return this.selenium.findElements(By.xpath(elementToFind));
     }
 
     public WebElement ByContainText(String text) {
-        return this.selenium.findElement(By.partialLinkText(text));
+        String elementToFind = String.format("//*[contains(text(),\"%s\")]", text);
+        return this.selenium.findElement(By.xpath(elementToFind));
     }
 
     public List<WebElement> ByContainTexts(String text) {
-        return this.selenium.findElements(By.partialLinkText(text));
+        String elementToFind = String.format("//*[contains(text(),\"%s\")]", text);
+        return this.selenium.findElements(By.xpath(elementToFind));
+    }
+
+    public List<WebElement> WithinElement(WebElement parent, String target_selector) {
+        return parent.findElements(By.cssSelector(target_selector));
+    }
+
+    public WebElement WithinTextElement(String parent_attr, String target_text) {
+        String parentElement = String.format("//*[@%s]", parent_attr);
+        String targetElement = String.format("//*[contains(text(),\"%s\")]", target_text);
+        String locator = parentElement.concat(targetElement);
+        return this.selenium.findElement(By.xpath(locator));
+    }
+
+    public WebElement WithinExactTextElement(String parent_attr, String target_text) {
+        String parentElement = String.format("//*[@%s]", parent_attr);
+        String targetElement = String.format("//*[text()=\"%s\")]", target_text);
+        String locator = parentElement.concat(targetElement);
+        return this.selenium.findElement(By.xpath(locator));
+    }
+
+    public WebElement FilterByText(String filter_text, Integer parent_target) {
+        String index = Integer.toString(parent_target);
+        String locator = String.format("//*[text()=\"%s\"]/ancestor::*[%s]", filter_text, index);
+        return this.selenium.findElement(By.xpath(locator));
+    }
+
+    public List<WebElement> FilterByElement(String target_selector, String filter_selector) {
+        String locator = String.format("%s:has(%s)", target_selector, filter_selector);
+        return this.selenium.findElements(By.cssSelector(locator));
+    }
+
+    public List<WebElement> FilterByNotElement(String target_selector, String filter_selector) {
+        String locator = String.format("%s:not(%s)", target_selector, filter_selector);
+        return this.selenium.findElements(By.cssSelector(locator));
     }
 }
