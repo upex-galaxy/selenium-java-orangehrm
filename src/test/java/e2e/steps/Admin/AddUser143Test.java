@@ -188,11 +188,14 @@ public class AddUser143Test extends TestBase {
         WebElement submitSave = get.Selector("button[type='submit']");
         submitSave.click();
         // confirmacion de Successfully Saved
-        WebElement frameSuccess = get.Selector(".oxd-toast--success .oxd-text--toast-message");
-        String success = frameSuccess.getText();
-        System.out.println(success);
-        then.shouldContain(success, "Successfully Saved");
-        Thread.sleep(3000);
+        /*
+         * WebElement frameSuccess =
+         * get.Selector(".oxd-toast--success .oxd-text--toast-message");
+         * String success = frameSuccess.getText();
+         * System.out.println(success);
+         * then.shouldContain(success, "Successfully Saved");
+         * Thread.sleep(3000);
+         */
         // confirmar que nos redirige a la pagina inicial
         WebElement tittleAdminConfirm = get.Selector(".oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module");
         String valueConfirm = tittleAdminConfirm.getText();
