@@ -34,10 +34,10 @@ public class AddUser143Test extends TestBase {
         WebElement buttonAdmin = get.Selector("a[href='/web/index.php/admin/viewAdminModule']");
         buttonAdmin.click();
         // verificar que estamos en la pestaña de admin
-        WebElement tittleAdmin = get.Selector(".oxd-topbar-header-title");
+        WebElement tittleAdmin = get.Selector(".oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module");
         String value = tittleAdmin.getText();
         System.out.println(value);
-        then.shouldBeEqual(value, "Admin\nUser Management");
+        then.shouldBeEqual(value, "Admin");
         // guardar los datos de un useR
         WebElement username = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
         String textUsername = username.getText();
@@ -130,10 +130,10 @@ public class AddUser143Test extends TestBase {
         then.shouldContain(success, "Successfully Saved");
         Thread.sleep(3000);
         // confirmar que nos redirige a la pagina inicial
-        WebElement tittleAdminConfirm = get.Selector(".oxd-topbar-header-title");
+        WebElement tittleAdminConfirm = get.Selector(".oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module");
         String valueConfirm = tittleAdminConfirm.getText();
         System.out.println(value);
-        then.shouldBeEqual(valueConfirm, "Admin\nUser Management");
+        then.shouldBeEqual(valueConfirm, "Admin");
         // confirmar que el user esta en la lista
         WebElement findUser = get
                 .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
