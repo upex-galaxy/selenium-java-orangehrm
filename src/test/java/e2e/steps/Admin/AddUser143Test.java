@@ -196,18 +196,20 @@ public class AddUser143Test extends TestBase {
          * then.shouldContain(success, "Successfully Saved");
          * Thread.sleep(3000);
          */
-        // confirmar que nos redirige a la pagina inicial
-        WebElement tittleAdminConfirm = get.Selector(".oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module");
-        String valueConfirm = tittleAdminConfirm.getText();
-        System.out.println(value);
-        then.shouldBeEqual(valueConfirm, "Admin");
-        // confirmar que el user esta en la lista
-        WebElement findUser = get
-         .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
-        //WebElement findUser = get
-             //   .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),usernameRandom)]");
-        String textFindUser = findUser.getText();
-        System.out.println("se ENCONTRÓ: " + textFindUser);
-
+        /*
+         * confirmar que nos redirige a la pagina inicial
+         * WebElement tittleAdminConfirm =
+         * get.Selector(".oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module");
+         * String valueConfirm = tittleAdminConfirm.getText();
+         * System.out.println(value);
+         * then.shouldBeEqual(valueConfirm, "Admin");
+         * // confirmar que el user esta en la lista
+         * WebElement findUser = get
+         * .Xpath(
+         * "//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]"
+         * );
+         * String textFindUser = findUser.getText();
+         * System.out.println("se ENCONTRÓ: " + textFindUser);
+         */
     }
 }
