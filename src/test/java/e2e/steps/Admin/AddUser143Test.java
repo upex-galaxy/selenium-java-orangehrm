@@ -39,41 +39,82 @@ public class AddUser143Test extends TestBase {
         String value = tittleAdmin.getText();
         System.out.println(value);
         then.shouldBeEqual(value, "Admin");
-        // guardar los datos de un useR
-
+        // guardar los datos de un useR *********copiando lo de ely*****
+        List<WebElement> cards = get.FilterByElement("[role=\"row\"]", ".oxd-table-cell");
+        Integer availableEmployees = cards.size();
+        Integer randomSelection = new Random().nextInt(availableEmployees);
+        WebElement givenEmployee = cards.get(randomSelection);
+        then.shouldBeVisible(givenEmployee);
+        // String givenUsernameValue;
+        String textUserRol;
+        String textEmployeeName;
+        String textEmployeeStatus;
+        Integer expectedSize;
+        String rowData;
         String headlessValue = System.getProperty("headless");
-
         if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
-            // WebElement username =
-            // get.Xpath("//*[@class='oxd-table']//*[@role='cell'][1]");
-            // String textUsername = username.getText();
-            // System.out.println("eL USERNAME ES: " + textUsername);
-            WebElement getUserRol = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
-            String textUserRol = getUserRol.getText();
-            System.out.println("eL ROL ES: " + textUserRol);
-            WebElement employeeName = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][1]");
-            String textEmployeeName = employeeName.getText();
-            System.out.println("eL NOMBRE ES: " + textEmployeeName);
-            WebElement statusEmployee = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][3]");
-            String textEmployeeStatus = statusEmployee.getText();
-            System.out.println("eL STATUS ES: " + textEmployeeStatus);
+            rowData = "[role=cell] .data";
+            expectedSize = 4;
         } else {
-
+            rowData = "[role=\"cell\"]>div";
+            expectedSize = 6;
+        }
+        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        then.shouldBeEqualInt(data.size(), expectedSize);
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            // givenUsernameValue = data.get(0).getText();
+            textUserRol = data.get(1).getText();
+            textEmployeeName = data.get(2).getText();
+            textEmployeeStatus = data.get(3).getText();
+        } else {
+            // givenUsernameValue = data.get(1).getText();
+            textUserRol = data.get(2).getText();
+            textEmployeeName = data.get(3).getText();
+            textEmployeeStatus = data.get(4).getText();
         }
 
-        WebElement username = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
-        String textUsername = username.getText();
-        System.out.println("eL USERNAME ES: " + textUsername);
-        WebElement getUserRol = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][3]");
-        String textUserRol = getUserRol.getText();
-        System.out.println("eL ROL ES: " + textUserRol);
-        WebElement employeeName = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][4]");
-        String textEmployeeName = employeeName.getText();
-        System.out.println("eL NOMBRE ES: " + textEmployeeName);
-        WebElement statusEmployee = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][5]");
-        String textEmployeeStatus = statusEmployee.getText();
-        System.out.println("eL STATUS ES: " + textEmployeeStatus);
-
+        /*
+         * comentando lo que hice porque no toma el headless
+         * String headlessValue = System.getProperty("headless");
+         * 
+         * if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+         * WebElement username =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][1]");
+         * String textUsername = username.getText();
+         * System.out.println("eL USERNAME ES: " + textUsername);
+         * WebElement getUserRol =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
+         * String textUserRol = getUserRol.getText();
+         * System.out.println("eL ROL ES: " + textUserRol);
+         * WebElement employeeName =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][1]");
+         * String textEmployeeName = employeeName.getText();
+         * System.out.println("eL NOMBRE ES: " + textEmployeeName);
+         * WebElement statusEmployee =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][3]");
+         * String textEmployeeStatus = statusEmployee.getText();
+         * System.out.println("eL STATUS ES: " + textEmployeeStatus);
+         * } else {
+         * 
+         * }
+         * 
+         * WebElement username =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
+         * String textUsername = username.getText();
+         * System.out.println("eL USERNAME ES: " + textUsername);
+         * WebElement getUserRol =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][3]");
+         * String textUserRol = getUserRol.getText();
+         * System.out.println("eL ROL ES: " + textUserRol);
+         * WebElement employeeName =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][4]");
+         * String textEmployeeName = employeeName.getText();
+         * System.out.println("eL NOMBRE ES: " + textEmployeeName);
+         * WebElement statusEmployee =
+         * get.Xpath("//*[@class='oxd-table']//*[@role='cell'][5]");
+         * String textEmployeeStatus = statusEmployee.getText();
+         * System.out.println("eL STATUS ES: " + textEmployeeStatus);
+         */
         // hacer click en add
         WebElement buttonAdd = get.Selector(".oxd-icon.bi-plus.oxd-button-icon");
         buttonAdd.click();
@@ -132,8 +173,9 @@ public class AddUser143Test extends TestBase {
         WebElement locatorUserName = get.Xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
         Random random = new Random();
         String numRandom = String.valueOf(random.nextInt(1000));
-        locatorUserName.sendKeys("DaryelinRossell" + numRandom);
-        System.out.println("DaryelinRossell" + numRandom);
+        String usernameRandom = "DaryelinRossell" + numRandom;
+        locatorUserName.sendKeys(usernameRandom);
+        System.out.println(usernameRandom);
 
         // Ingresando password
         WebElement locatorPassword = get.Xpath("(//input[@type='password'])[1]");
@@ -157,10 +199,12 @@ public class AddUser143Test extends TestBase {
         System.out.println(value);
         then.shouldBeEqual(valueConfirm, "Admin");
         // confirmar que el user esta en la lista
+        // WebElement findUser = get
+        // .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
         WebElement findUser = get
-                .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
+                .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),usernameRandom)]");
         String textFindUser = findUser.getText();
-        System.out.println("se ENCONTRO: " + textFindUser);
+        System.out.println("se ENCONTRÓ: " + textFindUser);
 
     }
 }
