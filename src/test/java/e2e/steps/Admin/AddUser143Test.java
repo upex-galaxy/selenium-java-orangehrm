@@ -1,6 +1,7 @@
 package e2e.steps.Admin;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.*;
@@ -39,6 +40,26 @@ public class AddUser143Test extends TestBase {
         System.out.println(value);
         then.shouldBeEqual(value, "Admin");
         // guardar los datos de un useR
+        
+        String headlessValue = System.getProperty("headless");
+       
+        if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
+            WebElement username = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][1]");
+        String textUsername = username.getText();
+        System.out.println("eL USERNAME ES: " + textUsername);
+        WebElement getUserRol = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
+        String textUserRol = getUserRol.getText();
+        System.out.println("eL ROL ES: " + textUserRol);
+        WebElement employeeName = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][3]");
+        String textEmployeeName = employeeName.getText();
+        System.out.println("eL NOMBRE ES: " + textEmployeeName);
+        WebElement statusEmployee = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][4]");
+        String textEmployeeStatus = statusEmployee.getText();
+        System.out.println("eL STATUS ES: " + textEmployeeStatus);
+        } else {
+           
+        }
+
         WebElement username = get.Xpath("//*[@class='oxd-table']//*[@role='cell'][2]");
         String textUsername = username.getText();
         System.out.println("eL USERNAME ES: " + textUsername);
