@@ -202,10 +202,10 @@ public class AddUser143Test extends TestBase {
         System.out.println(value);
         then.shouldBeEqual(valueConfirm, "Admin");
         // confirmar que el user esta en la lista
-        // WebElement findUser = get
-        // .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
         WebElement findUser = get
-                .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),usernameRandom)]");
+         .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),\"DaryelinRossell\")]");
+        //WebElement findUser = get
+             //   .Xpath("//*[@class='oxd-table']//*[@role='cell']//*[contains(text(),usernameRandom)]");
         String textFindUser = findUser.getText();
         System.out.println("se ENCONTRÓ: " + textFindUser);
 
