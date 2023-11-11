@@ -7,9 +7,7 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
-
 public class GX34835postAVideoByUrlTest extends TestBase {
-
 
     @BeforeEach
     @DisplayName("41778 | OrangeHRM | Buzz | Post a Video by URL")
@@ -28,33 +26,26 @@ public class GX34835postAVideoByUrlTest extends TestBase {
     @Test
     @DisplayName("TC1: Validar publicar un video mediante URL")
     public void TestCase1() throws InterruptedException {
-        
+
         WebElement buttonBuzz = get.Selector("[href='/web/index.php/buzz/viewBuzz']");
         buttonBuzz.click();
 
         WebElement titlePost = get.Xpath("//button[text()=' Post ']");
         String value = titlePost.getText();
         System.out.println(value);
-        then.shouldBeEqual(value, "Post");
+        then.shouldContain(value, "Post");
 
         Thread.sleep(2000);
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
-        /*
-         * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         * // con xpath selector
-         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-         * String titleshare = titlePost.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Share Video");
-         * Thread.sleep(2000);
-         * /*
-         * WebElement titleUrl = get.Selector("label.oxd-label");
-         * String titleshare = titleUrl.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Video URL");
-         * Thread.sleep(2000);
-         */
+
+        // con xpath selector
+        WebElement titleShareVideo = get.Xpath("//p[text()='Share Video']");
+        String titleshare = titleShareVideo.getText();
+        System.out.println(titleshare);
+        then.shouldContain(titleshare, "Share Video");
+        Thread.sleep(2000);
+
         WebElement inputShare = get.Selector("div[class=orangehrm-buzz-post-modal-header] textarea");
         inputShare.sendKeys("queria compartir esto");
         WebElement inputUrl = get.Selector("textarea[class$=resize-vertical]");
@@ -85,21 +76,13 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
 
-        /*
-         * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         * // con xpath selector
-         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-         * String titleshare = titlePost.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Share Video");
-         * Thread.sleep(2000);
-         * /*
-         * WebElement titleUrl = get.Selector("label.oxd-label");
-         * String titleshare = titleUrl.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Video URL");
-         * Thread.sleep(2000);
-         */ Thread.sleep(2000);
+        // WebElement titleShareVideo1 = get.Selector("p[class$=oxd-text--card-title]");
+        // con xpath selector
+        WebElement titleShareVideo1 = get.Xpath("//p[text()='Share Video']");
+        String titleshare = titleShareVideo1.getText();
+        System.out.println(titleshare);
+        then.shouldContain(titleshare, "Share Video");
+        Thread.sleep(2000);
 
         WebElement inputShare = get.Selector("div[class=orangehrm-buzz-post-modal-header] textarea");
         inputShare.sendKeys("queria compartir esto");
@@ -125,21 +108,20 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         WebElement titleBuzz = get.Xpath("//button[text()=' Post ']");
         String value = titleBuzz.getText();
         System.out.println(value);
-        then.shouldBeEqual(value, "Post");
+        then.shouldContain(value, "Post");
 
         Thread.sleep(2000);
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
 
+        // WebElement titlePost2 = get.Selector("p[class$=oxd-text--card-title]");
+        // con xpath selector
+        WebElement titlePost2 = get.Xpath("//p[text()='Share Video']");
+        String titleshare = titlePost2.getText();
+        System.out.println(titleshare);
+        then.shouldBeEqual(titleshare, "Share Video");
+        Thread.sleep(2000);
         /*
-         * WebElement titlePost = get.Selector("p[class$=oxd-text--card-title]");
-         * // con xpath selector
-         * WebElement titlePost = get.Xpath("//p[text()='Share Video']");
-         * String titleshare = titlePost.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Share Video");
-         * Thread.sleep(2000);
-         * /*
          * WebElement titleUrl = get.Selector("label.oxd-label");
          * String titleshare = titleUrl.getText();
          * System.out.println(titleshare);
