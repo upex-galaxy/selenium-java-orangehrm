@@ -1,6 +1,5 @@
 package e2e.steps.Account;
 
-import java.io.IOException;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.*;
