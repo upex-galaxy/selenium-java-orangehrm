@@ -38,6 +38,9 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         Thread.sleep(2000);
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
+        Thread.sleep(2000);
+        WebElement popup = get.ByRole("document");
+        then.shouldBeVisible(popup);
 
         // con xpath selector
         WebElement titleShareVideo = get.Xpath("//p[text()='Share Video']");
@@ -75,6 +78,9 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         Thread.sleep(2000);
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
+        Thread.sleep(2000);
+        WebElement popup = get.ByRole("document");
+        then.shouldBeVisible(popup);
 
         // WebElement titleShareVideo1 = get.Selector("p[class$=oxd-text--card-title]");
         // con xpath selector
@@ -113,6 +119,9 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         Thread.sleep(2000);
         WebElement buttonPost = get.Selector("span[class*=oxd-glass-button-icon--videoglass]");
         buttonPost.click();
+        Thread.sleep(2000);
+        WebElement popup = get.ByRole("document");
+        then.shouldBeVisible(popup);
 
         // WebElement titlePost2 = get.Selector("p[class$=oxd-text--card-title]");
         // con xpath selector
