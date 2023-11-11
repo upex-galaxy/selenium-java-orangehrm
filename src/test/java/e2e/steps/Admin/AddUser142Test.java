@@ -22,7 +22,7 @@ public class AddUser142Test extends TestBase {
 
     @Test
     @DisplayName("GX3-78 | TC1: Should add a new user when filling all required fields correclty")
-    public void addUserSucessfully() throws InterruptedException, IOException {
+    public void addUserSucessfully(TestInfo testInfo) throws InterruptedException, IOException {
         WebElement AdminTab = get.ByEqualText("Admin");
         Do.click(AdminTab);
         Thread.sleep(1000);
@@ -50,7 +50,7 @@ public class AddUser142Test extends TestBase {
             rowData = "[role=\"cell\"]>div";
             expectedSize = 6;
         }
-        List<WebElement> data = get.WithinElement(givenEmployee, rowData);
+        List<WebElement> data = get.WithinElements(givenEmployee, rowData);
         then.shouldBeEqualInt(data.size(), expectedSize);
         if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
             givenUsernameValue = data.get(0).getText();
@@ -94,7 +94,7 @@ public class AddUser142Test extends TestBase {
         Do.enterValue(employeeNameField, givenEmployeeNameValue);
         Thread.sleep(2000);
         Do.pressKeyDown();
-        Do.screenshot();
+        Do.screenshot(testInfo);
         Do.pressEnter();
 
         WebElement usernameField = get.FilterByText("Username", 2);
