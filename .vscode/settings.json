@@ -1,7 +1,7 @@
 {
 	"workbench.settings.editor": "json",
-	"workbench.colorTheme": "Default Dark Modern",
-	"workbench.iconTheme": "vs-seti",
+	"workbench.colorTheme": "Andromeda Italic",
+	"workbench.iconTheme": "vscode-icons",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
