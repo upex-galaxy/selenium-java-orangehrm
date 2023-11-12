@@ -82,7 +82,6 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         WebElement popup = get.ByRole("document");
         then.shouldBeVisible(popup);
 
-        // WebElement titleShareVideo1 = get.Selector("p[class$=oxd-text--card-title]");
         // con xpath selector
         WebElement titleShareVideo1 = get.Xpath("//p[text()='Share Video']");
         String titleshare = titleShareVideo1.getText();
@@ -123,20 +122,13 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         WebElement popup = get.ByRole("document");
         then.shouldBeVisible(popup);
 
-        // WebElement titlePost2 = get.Selector("p[class$=oxd-text--card-title]");
         // con xpath selector
         WebElement titlePost2 = get.Xpath("//p[text()='Share Video']");
         String titleshare = titlePost2.getText();
         System.out.println(titleshare);
         then.shouldBeEqual(titleshare, "Share Video");
         Thread.sleep(2000);
-        /*
-         * WebElement titleUrl = get.Selector("label.oxd-label");
-         * String titleshare = titleUrl.getText();
-         * System.out.println(titleshare);
-         * then.shouldBeEqual(titleshare, "Video URL");
-         * Thread.sleep(2000);
-         */
+
         WebElement inputUrl = get.Selector("textarea[class$=resize-vertical]");
         String stringInput = inputUrl.getText();
         System.out.println(stringInput);

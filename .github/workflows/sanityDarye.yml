@@ -1,9 +1,9 @@
-name: 🤖CI run Test Suite Execution🧪
+ name: 🤖CI run Test Suite Execution🧪
 run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}}
 
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main
     push:
-        branches: ['main'] #todo: Cambia este nombre de rama por tu rama de tarea (haz esto en otro archivo yml)
+        branches: ['GX-34845-orange-hrm-buzz-post-a-video-by-url'] #todo: Cambia este nombre de rama por tu rama de tarea (haz esto en otro archivo yml)
 
 jobs:
     SanityTest:
@@ -25,7 +25,7 @@ jobs:
               run: mvn -B package --file pom.xml
 
             - name: 🧪Run Selenium tests
-              run: mvn clean verify -Dit.test=LoginTest -Dheadless=true
+              run: mvn clean verify -Dit.test=GX34835postAVideoByUrlTest -Dheadless=true
 
             - name: ✅Import Test Results to Xray
               if: always()
@@ -35,8 +35,8 @@ jobs:
                   password: ${{secrets.XRAY_CLIENT_SECRET}}
                   testFormat: 'junit' #OPCIONES PARA CAMBIAR: 'junit' (para xml) o 'cucumber' (para json)
                   testPaths: 'target/failsafe-reports/TEST-*.xml'
-                  testExecKey: 'GX3-209' #? EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
-                  projectKey: 'GX3' #? EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
+                  testExecKey: 'GX-42209' #? EDITAR AQUÍ EL TEST EXECUTION A IMPORTAR LAS PRUEBAS.
+                  projectKey: 'GX' #? EDITAR EN CASO DE TRABAJAR CON OTRO PROYECTO.
 
             - name: 🔔Slack Notification of Done
               if: always()

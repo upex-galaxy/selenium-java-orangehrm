@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebElement;
 
 import e2e.fixtures.TestBase;
@@ -15,7 +16,7 @@ public class AddUser210Test extends TestBase {
 
     @Test
     @DisplayName("TC01: Test")
-    public void tc1() throws InterruptedException, IOException {
+    public void tc1(TestInfo test) throws InterruptedException, IOException {
         LoginPage loginPage = new LoginPage(web, get, Do);
         loginPage.login();
         Thread.sleep(2000);
@@ -61,7 +62,7 @@ public class AddUser210Test extends TestBase {
         Do.enterValue(addUserContainer.get(5), "A3b!7xZ*9qP");
 
         WebElement saveButton = get.Selector("button[type=\"submit\"]");
-        Do.screenshot();
+        Do.screenshot(test);
         saveButton.click();
         Thread.sleep(2000);
         String confirmSaved = get
