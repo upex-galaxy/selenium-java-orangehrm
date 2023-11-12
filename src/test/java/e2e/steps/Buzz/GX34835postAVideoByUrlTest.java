@@ -85,7 +85,7 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         // con xpath selector
         WebElement titleShareVideo1 = get.Xpath("//p[text()='Share Video']");
         String titleshare = titleShareVideo1.getText();
-        System.out.println(titleshare);
+        System.out.println("El texto que esta toamando del elemento es:" + titleshare);
         then.shouldContain(titleshare, "Share Video");
         Thread.sleep(2000);
 
@@ -112,7 +112,7 @@ public class GX34835postAVideoByUrlTest extends TestBase {
 
         WebElement titleBuzz = get.Xpath("//button[text()=' Post ']");
         String value = titleBuzz.getText();
-        System.out.println(value);
+        System.out.println("El texto que esta toamando del elemento es:" + value);
         then.shouldContain(value, "Post");
 
         Thread.sleep(2000);
@@ -125,7 +125,7 @@ public class GX34835postAVideoByUrlTest extends TestBase {
         // con xpath selector
         WebElement titlePost2 = get.Xpath("//p[text()='Share Video']");
         String titleshare = titlePost2.getText();
-        System.out.println(titleshare);
+        System.out.println("El texto que esta toamando del elemento es:" + titleshare);
         then.shouldBeEqual(titleshare, "Share Video");
         Thread.sleep(2000);
 
