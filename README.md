@@ -28,16 +28,34 @@ Este es un proyecto Oficial de UPEX para usar Selenium4 usando Java y Maven.
 5. Una vez descargado y dentro del Repo, automáticamente JAVA y MAVEN detectarán los paquetes para instalar las dependencias del archivo pom.xml, dado
    que el nombre del archivo del proyecto es igual al `<artifactId>` del archivo pom.xml. (Esto es importante)
 
-6. [IMPORTANTE]: Recuerda ejecutar en la terminal el siguiente comando para compilar el proyecto y crear todos los correspondientes classpaths de los
-   archivos del repo:
+6. [**IMPORTANTE**]: Recuerda ejecutar en la terminal el siguiente comando para compilar el proyecto y crear todos los correspondientes classpaths de
+   los archivos del repo:
 
     ```bash
-    mvn compile
+    mvn clean package
     ```
 
-7. Para comprobar que todo está instalado, EJECUTA el comando de pruebas E2E: <br> `mvn verify -Dheadless=true`<br>, lo cual ejecutará todas las
-   pruebas activas Automatizadas de Selenium que tiene el repo (en modo headless, sin aparecer el navegador en pantalla). <br> **(Puedes detener esta
-   ejecución de pruebas si te parece larga con Ctrl+C en la terminal)**
+7. Para comprobar que todo está instalado, EJECUTA el comando de pruebas E2E:
+
+    ```bash
+    mvn verify -Dheadless=true
+    ```
+
+    Cuyo comando ejecutará todas las pruebas activas Automatizadas de Selenium que tiene el repo (en modo headless, sin aparecer el navegador en
+    pantalla). <br> **(Puedes detener esta ejecución de pruebas si te parece larga con Ctrl+C en la terminal)**
+
+8. [**PLUS**]: Como todo proyecto con "Reporte de Pruebas" es necesario tener una dependencia de Reportes. En nuestro caso, usaremos el MEJOR forever
+   "Allure". Deberás descargar e instalarlo con un comando.
+    - Para comenzar, ejecuta el siguiente comando que descargará Allure en tu repo local (cuyo directorio está ignorado por git para evitar problemas
+      de almacenamiento):
+        ```bash
+        mvn allure:serve
+        ```
+    - Luego de haberse creado la carpeta correspondiente de .allure en el directorio principal, se ejecutará automáticamente el servidor en un puerto
+      local desde tu archivo generado index.html; posiblemente te abrirá el navegador por defecto automáticamente con vista a Allure Reports.
+    - Para más información sobre ALLURE REPORTS con JUnit5 y Maven visita:
+        - [AllureReports.org](https://allurereport.org/docs/junit5/)
+        - [GitHub-Allure-Maven](https://github.com/allure-framework/allure-maven)
 
 # EJECUCIÓN DE PRUEBAS CON SELENIUM
 
@@ -79,6 +97,8 @@ mvn verify -Dit.test=FirstTest
 
 Recuerda que si utilizas Visual Studio Code, puedes correr pruebas directamente utilizando la extensión Java Test Runner, cuya función está en el
 panel de navegación a un costado del Visual Studio Code.
+
+**NO OLVIDES, generar el Reporte de Pruebas con "Allure" para compartir tus resultados de prueba con el equipo de trabajo o tus managers!**
 
 # ESTRUCTURA DEL REPOSITORIO DE PRUEBAS
 
