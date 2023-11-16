@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
-public class GX34835postAVideoByUrlTest extends TestBase {
+public class GX42207postAVideoByUrlTest extends TestBase {
 
     @BeforeEach
     @DisplayName("41778 | OrangeHRM | Buzz | Post a Video by URL")

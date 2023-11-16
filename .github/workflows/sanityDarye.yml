@@ -1,9 +1,9 @@
- name: 🤖CI run Test Suite Execution🧪
+name: 🤖CI run Test Suite Execution🧪
 run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}}
 
 on: # This Run is a template. The correct "Run On" should be: Any except QA and Main
     push:
-        branches: ['GX-34845-orange-hrm-buzz-post-a-video-by-url'] #todo: Cambia este nombre de rama por tu rama de tarea (haz esto en otro archivo yml)
+        branches: ['GX-42207-buzz/post-a-video-by-url'] #todo: Cambia este nombre de rama por tu rama de tarea (haz esto en otro archivo yml)
 
 jobs:
     SanityTest:
@@ -25,7 +25,7 @@ jobs:
               run: mvn -B package --file pom.xml
 
             - name: 🧪Run Selenium tests
-              run: mvn clean verify -Dit.test=GX34835postAVideoByUrlTest -Dheadless=true
+              run: mvn clean verify -Dit.test=GX42207postAVideoByUrlTest -Dheadless=true
 
             - name: ✅Import Test Results to Xray
               if: always()
