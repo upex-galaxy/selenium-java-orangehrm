@@ -15,7 +15,7 @@ public class DriverManager {
         if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
             options.addArguments("--headless");
         }
-        return WebDriverManager.chromedriver().capabilities(options).create();
+        return WebDriverManager.chromedriver().clearDriverCache().capabilities(options).create();
     }
 
     public WebDriver setFirefoxDriver() {
@@ -33,7 +33,7 @@ public class DriverManager {
         if (headlessValue != null && "true".equalsIgnoreCase(headlessValue)) {
             options.addArguments("--headless");
         }
-        return WebDriverManager.edgedriver().capabilities(options).create();
+        return WebDriverManager.edgedriver().clearDriverCache().capabilities(options).create();
     }
     // todo: If another Browser Driver Setup is needed, create another one here.
 }
