@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
+@Disabled("Flaky Test, inestabilidad en selectores por texto , aveces cambia el idioma")
 public class AddUser142Test extends TestBase {
     // ? TD: https://upexgalaxy26.atlassian.net/browse/GX3-142
 
