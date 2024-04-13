@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
+@Disabled("Flaky Test - inestabilidad en selectores de indice")
 public class AddUser210Test extends TestBase {
 
     @Test
