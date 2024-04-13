@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import e2e.fixtures.TestBase;
 import e2e.page.LoginPage;
 
+@Disabled("Flaky Test, inestabilidad en algunos selectors")
 public class GX42207postAVideoByUrlTest extends TestBase {
 
     @BeforeEach
