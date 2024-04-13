@@ -127,7 +127,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.4.0</version>
+            <version>5.8.0</version>
         </dependency>
         <!--* test dependencies -->
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-guice -->
@@ -189,6 +189,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!--* JavaFaker: Para generacion de data -->
+        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>
