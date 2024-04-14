@@ -22,11 +22,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     private GX3_3082_DataForTest data;
     private GX3_3082_MessageData dataMessage;
     private String endpointUserCredential;
-    private String endpointViewUser;
-
-    public void cleanRecords() throws InterruptedException, IOException {
-        addUserCredentialPage.deleteRecords(endpointViewUser);
-    }
 
     @BeforeEach
     public void initializePagesAndData() {
@@ -34,7 +29,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
         addUserCredentialPage = new GX3_3082_AddCredentialUser(web, get, Do);
         data = new GX3_3082_DataForTest();
         dataMessage = new GX3_3082_MessageData();
-        endpointViewUser = data.getEndpointViewUsers.get();
         endpointUserCredential = data.getEndpointUserCredential.get();
     }
 
@@ -58,15 +52,13 @@ public class GX3_3082_UserCredentialTest extends TestBase {
                             "defaultValue", "defaultValue",
                             "defaultValue");
                 });
-        String expectMessage = dataMessage.getMessageSuccess.get();
         Allure.step("hacer click en el boton save", () -> {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess(expectMessage);
+            addUserCredentialPage.verifyMessageSuccess();
             Do.screenshot(testInfo);
         });
-        cleanRecords();
     }
 
     @Test
@@ -78,15 +70,13 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.fillUserDataCredential("Admin", "Enabled", "defaultValue", "defaultValue",
                     "defaultValue");
         });
-        String expectMessage = dataMessage.getMessageSuccess.get();
         Allure.step("hacer click en el boton save", () -> {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess(expectMessage);
+            addUserCredentialPage.verifyMessageSuccess();
             Do.screenshot(testInfo);
         });
-        cleanRecords();
     }
 
     @Test
@@ -98,15 +88,13 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.fillUserDataCredential("Admin", "Enabled", "defaultValue", "defaultValue",
                     "defaultValue");
         });
-        String expectMessage = dataMessage.getMessageSuccess.get();
         Allure.step("hacer click en el boton save", () -> {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess(expectMessage);
+            addUserCredentialPage.verifyMessageSuccess();
             Do.screenshot(testInfo);
         });
-        cleanRecords();
     }
 
     @Test
@@ -118,15 +106,13 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.fillUserDataCredential("Admin", "Disabled", "defaultValue", "defaultValue",
                     "defaultValue");
         });
-        String expectMessage = dataMessage.getMessageSuccess.get();
         Allure.step("hacer click en el boton save", () -> {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess(expectMessage);
+            addUserCredentialPage.verifyMessageSuccess();
             Do.screenshot(testInfo);
         });
-        cleanRecords();
     }
 
 }

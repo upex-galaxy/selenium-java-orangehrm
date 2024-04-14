@@ -7,7 +7,6 @@ import com.github.javafaker.Faker;
 public class GX3_3082_DataForTest {
 
     private String endpointAddUserCredential = "/admin/saveSystemUser";
-    private String endpointViewSystemUsers = "/admin/viewSystemUsers";
     private static Faker faker = new Faker();
     private String userFiveChar = "chars";
     private String userFourthChar = "char";
@@ -39,7 +38,6 @@ public class GX3_3082_DataForTest {
     public Supplier<String> getPasswordOverMaxLong = () -> passwordOverMaxLong;
     public Supplier<String> getPasswordNoLetter = () -> passwdNoLetter;
     public Supplier<String> getEndpointUserCredential = () -> endpointAddUserCredential;
-    public Supplier<String> getEndpointViewUsers = () -> endpointViewSystemUsers;
 
     public static String generatePassword(int desiredLength) {
         StringBuilder password = new StringBuilder();
