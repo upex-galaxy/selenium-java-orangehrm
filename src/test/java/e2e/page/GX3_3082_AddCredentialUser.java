@@ -1,6 +1,7 @@
 package e2e.page;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.junit.jupiter.api.Assertions;
 import com.github.javafaker.Faker;
 
+import e2e.fixtures.TestBase;
 import e2e.utils.Action;
 import e2e.utils.Locator;
 
@@ -45,6 +47,12 @@ public class GX3_3082_AddCredentialUser {
     public WebElement messageSuccess;
     @FindBy(css = "[class*='field-error-message']")
     public WebElement messageError;
+    @FindBy(css = "[class='oxd-table-header'] [class*='checkbox'] label")
+    public WebElement checkboxSelectAllRecords;
+    @FindBy(css = "button[class*='horizontal-margin']")
+    public WebElement checkboxDeleteAllRecords;
+    @FindBy(css = "button[class*='oxd-button--label-danger orangehrm-button-margin']")
+    public WebElement buttonConfirmDeleteAllRecords;
 
     public GX3_3082_AddCredentialUser(WebDriver driver, Locator get, Action Do) {
         this.driver = driver;
@@ -141,4 +149,14 @@ public class GX3_3082_AddCredentialUser {
         String messageText = messageSuccess.getText();
         Assertions.assertTrue(messageText.contains(msgSuccess));
     }
+
+    public void deleteRecords(String gotoEndpoint) throws InterruptedException {
+
+        this.driver.get(TestBase.BASE_URL.concat(gotoEndpoint));
+        checkboxSelectAllRecords.click();
+        checkboxDeleteAllRecords.click();
+        Thread.sleep(1000);
+        buttonConfirmDeleteAllRecords.click();
+    }
+
 }
