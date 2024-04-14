@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import org.junit.jupiter.api.Assertions;
 import com.github.javafaker.Faker;
 
 import e2e.utils.Action;
@@ -41,7 +41,7 @@ public class GX3_3082_AddCredentialUser {
     public WebElement confirmPasswordInput;
     @FindBy(css = "[type='submit']")
     public WebElement saveButton;
-    @FindBy(css = "class*='oxd-text--toast-message']")
+    @FindBy(css = "[class*='oxd-text--toast-message']")
     public WebElement messageSuccess;
     @FindBy(css = "[class*='field-error-message']")
     public WebElement messageError;
@@ -88,5 +88,57 @@ public class GX3_3082_AddCredentialUser {
 
     public void typeUsername() throws InterruptedException {
         usernameInput.sendKeys(username);
+    }
+
+    public void typePassword() throws InterruptedException {
+        passwordInput.sendKeys(password);
+    }
+
+    public void typeUsername(String Username) throws InterruptedException {
+        usernameInput.sendKeys(Username);
+    }
+
+    public void typePassword(String passwd) throws InterruptedException {
+        passwordInput.sendKeys(passwd);
+    }
+
+    public void typeConfirmPassword() throws InterruptedException {
+        confirmPasswordInput.sendKeys(password);
+    }
+
+    public void typeConfirmPassword(String passwd) throws InterruptedException {
+        confirmPasswordInput.sendKeys(passwd);
+    }
+
+    public void clickSaveButton() throws InterruptedException {
+        saveButton.click();
+    }
+
+    public void fillUserDataCredential(String role, String status, String username, String passwd, String confirmPasswd)
+            throws InterruptedException, IOException {
+        this.selectOptionUserRole(role);
+        this.selectOptionStatus(status);
+        this.typeEmployeeName();
+        if (username != "defaultValue") {
+            this.typeUsername(username);
+        } else {
+            this.typeUsername();
+        }
+        if (passwd != "defaultValue") {
+            this.typePassword(passwd);
+        } else {
+            this.typePassword();
+        }
+        if (confirmPasswd != "defaultValue") {
+            this.typeConfirmPassword(confirmPasswd);
+        } else {
+            this.typeConfirmPassword();
+        }
+    }
+
+    public void verifyMessageSuccess(String msgSuccess) throws InterruptedException {
+        Thread.sleep(2300);
+        String messageText = messageSuccess.getText();
+        Assertions.assertTrue(messageText.contains(msgSuccess));
     }
 }
