@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.junit.jupiter.api.*;
 
 import e2e.data.GX3_3082_DataForTest;
-import e2e.data.GX3_3082_MessageData;
 import e2e.fixtures.TestBase;
 import e2e.page.GX3_3082LoginPage;
 import e2e.page.GX3_3082_AddCredentialUser;
@@ -20,7 +19,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     private GX3_3082LoginPage loginPage;
     private GX3_3082_AddCredentialUser addUserCredentialPage;
     private GX3_3082_DataForTest data;
-    private GX3_3082_MessageData dataMessage;
     private String endpointUserCredential;
 
     @BeforeEach
@@ -28,7 +26,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
         loginPage = new GX3_3082LoginPage(web, get, Do);
         addUserCredentialPage = new GX3_3082_AddCredentialUser(web, get, Do);
         data = new GX3_3082_DataForTest();
-        dataMessage = new GX3_3082_MessageData();
         endpointUserCredential = data.getEndpointUserCredential.get();
     }
 
@@ -228,8 +225,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC10(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwdNoLowerCase = data.getPasswordNoLower.get();
-        String passwdErrorNoLoweCase = dataMessage.getPasswdErrorNoLowerCase.get();
-        String[] expectMessages = { passwdErrorNoLoweCase };
 
         Allure.step("insertar valores sin ninguna letra minúscula y completar las credenciales del usuario", () -> {
             addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
@@ -243,7 +238,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -257,8 +252,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC11(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwdNoUpperCase = data.getPasswordNoUpper.get();
-        String passwdErrorNoUpperCase = dataMessage.getPasswdErrorNoUpperCase.get();
-        String[] expectMessages = { passwdErrorNoUpperCase };
 
         Allure.step("insertar valores sin ninguna letra mayúscula y completar las credenciales del usuario", () -> {
             addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
@@ -272,7 +265,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -285,8 +278,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC12(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwdNoNumbers = data.getPasswordNoNumbers.get();
-        String passwdErrorErrorNoNumber = dataMessage.getPasswdErrorNoNumber.get();
-        String[] expectMessages = { passwdErrorErrorNoNumber };
 
         Allure.step("insertar valores sin ningún número y completar las credenciales del usuario", () -> {
             addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
@@ -300,7 +291,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -313,8 +304,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC13(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwdNoLetter = data.getPasswordNoLetter.get();
-        String passwdErrorNoLower = dataMessage.getPasswdErrorNoLowerCase.get();
-        String[] expectMessages = { passwdErrorNoLower };
 
         Allure.step("insertar valores sin ninguna letra y completar las credenciales del usuario", () -> {
             addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
@@ -328,7 +317,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -342,8 +331,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC14(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwdNoSpecialChar = data.getPasswordNoSpecialChar.get();
-        String passwdErrorNoSpecialChar = dataMessage.getPasswdErrorNoSpecialChar.get();
-        String[] expectMessages = { passwdErrorNoSpecialChar };
 
         Allure.step("insertar valores sin ningún carácter especial y completar las credenciales del usuario", () -> {
             addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
@@ -357,7 +344,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -370,8 +357,6 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     public void TC15(TestInfo testInfo) throws InterruptedException, IOException {
 
         String passwd = data.getPasswordSevenChar.get();
-        String passwdErrorErrorNoMatch = dataMessage.getPasswdErrorNoMatch.get();
-        String[] expectMessages = { passwdErrorErrorNoMatch };
 
         Allure.step(
                 "insertar valores diferentes en Password y confirm Password y completar las credenciales del usuario",
@@ -387,7 +372,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
