@@ -44,7 +44,7 @@ public class GX3_3082_AddCredentialUser {
     @FindBy(css = "[class*='oxd-text--toast-message']")
     public WebElement messageSuccess;
     @FindBy(css = "[class*='field-error-message']")
-    public WebElement messageError;
+    public List<WebElement> messageError;
 
     public GX3_3082_AddCredentialUser(WebDriver driver, Locator get, Action Do) {
         this.driver = driver;
@@ -137,7 +137,24 @@ public class GX3_3082_AddCredentialUser {
     }
 
     public void verifyMessageSuccess() throws InterruptedException {
-        Thread.sleep(2300);
+        Thread.sleep(2500);
         Assertions.assertTrue(messageSuccess.isDisplayed());
     }
+
+    public void verifyMessageError(String[] messagesTestErrors) throws InterruptedException {
+
+        for (int i = 0; i < messageError.size(); i++) {
+            String messageTxt = messageError.get(i).getText();
+            Assertions.assertTrue(messageTxt.contains(messagesTestErrors[i]));
+
+        }
+    }
+
+    public void verifyMessageEmpty(String messagesTestErrors) throws InterruptedException {
+        for (int i = 0; i < (messageError.size() - 1); i++) {
+            String messageTxt = messageError.get(i).getText();
+            Assertions.assertEquals(messageTxt, messagesTestErrors);
+        }
+    }
+
 }

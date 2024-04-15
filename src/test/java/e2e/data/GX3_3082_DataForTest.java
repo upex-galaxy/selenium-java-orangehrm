@@ -8,11 +8,11 @@ public class GX3_3082_DataForTest {
 
     private String endpointAddUserCredential = "/admin/saveSystemUser";
     private static Faker faker = new Faker();
-    private String userFiveChar = "chars";
-    private String userFourthChar = "char";
-    private String usernameMaxLong = "a".repeat(64);
-    private String usernameMaxOverLong = "a".repeat(64).concat("g");
-    private String usernameExist = "CrossFire";
+    private String userFiveChar = faker.lorem().characters(5);
+    private String userFourthChar = faker.lorem().characters(4);
+    private String usernameMaxLong = faker.lorem().characters(40);
+    private String usernameMaxOverLong = faker.regexify("[a-zA-Z0-9]{41}");
+    private String usernameExist = "Admin";
     private String passwdSevenChar = "Pas12#&";
     private String passwdSixChar = "Pas12#";
     private String passwdNoUppercase = "pass12&";
@@ -20,8 +20,8 @@ public class GX3_3082_DataForTest {
     private String passwdNoLetter = "12345#&&=";
     private String passwdNoSpecialChar = "Pass123";
     private String passwdNoNumbers = "Pass???";
-    private String passwordMaxLong = generatePassword(64);
-    private String passwordOverMaxLong = generatePassword(64).concat("s");
+    private String passwordMaxLong = faker.regexify("[a-zA-Z0-9!@#$]{64}");
+    private String passwordOverMaxLong = faker.regexify("[a-zA-Z0-9!@#$]{65}");
 
     public Supplier<String> getUsernameFiveChar = () -> userFiveChar;
     public Supplier<String> getUsernameFourthChar = () -> userFourthChar;
@@ -39,18 +39,4 @@ public class GX3_3082_DataForTest {
     public Supplier<String> getPasswordNoLetter = () -> passwdNoLetter;
     public Supplier<String> getEndpointUserCredential = () -> endpointAddUserCredential;
 
-    public static String generatePassword(int desiredLength) {
-        StringBuilder password = new StringBuilder();
-
-        while (password.length() < desiredLength) {
-            char c = (char) faker.number().numberBetween(33, 126);
-            password.append(c);
-
-            if (password.length() == desiredLength) {
-                break;
-            }
-        }
-
-        return password.toString();
-    }
 }
