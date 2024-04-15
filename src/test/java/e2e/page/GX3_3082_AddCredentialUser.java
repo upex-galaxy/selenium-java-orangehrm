@@ -137,7 +137,7 @@ public class GX3_3082_AddCredentialUser {
     }
 
     public void verifyMessageSuccess() throws InterruptedException {
-        Thread.sleep(2500);
+        Thread.sleep(3000);
         Assertions.assertTrue(messageSuccess.isDisplayed());
     }
 
