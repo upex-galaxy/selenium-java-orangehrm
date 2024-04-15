@@ -169,7 +169,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageEmpty();
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -362,4 +362,62 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             Do.screenshot(testInfo);
         });
     }
+
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC15: Validar NO poder agregar credenciales a un usuario cuando el campo Confirm Password no coincide con el campo Password")
+    public void TC15(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwd = data.getPasswordSevenChar.get();
+        String passwdErrorErrorNoMatch = dataMessage.getPasswdErrorNoMatch.get();
+        String[] expectMessages = { passwdErrorErrorNoMatch };
+
+        Allure.step(
+                "insertar valores diferentes en Password y confirm Password y completar las credenciales del usuario",
+                () -> {
+                    addUserCredentialPage.fillUserDataCredential("ESS", "Enabled",
+                            "defaultValue",
+                            passwd,
+                            "defaultValue");
+                });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC16: Validar NO poder agregar credenciales a un usuario existente")
+    public void TC16(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String usernameExist = data.getUsernameExist.get();
+
+        Allure.step(
+                "insertar un usuario existente y completar las credenciales del usuario", () -> {
+                    addUserCredentialPage.fillUserDataCredential("Admin", "Disabled",
+                            usernameExist,
+                            "defaultValue",
+                            "defaultValue");
+                });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMessageErrorVisibiliTy();
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
 }

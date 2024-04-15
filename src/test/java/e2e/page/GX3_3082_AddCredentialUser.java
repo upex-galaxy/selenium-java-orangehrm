@@ -160,7 +160,7 @@ public class GX3_3082_AddCredentialUser {
         }
     }
 
-    public void verifyMessageEmpty() throws InterruptedException {
+    public void verifyMessageErrorVisibiliTy() throws InterruptedException {
 
         for (int i = 0; i < (messageError.size() - 1); i++) {
             Thread.sleep(500);
