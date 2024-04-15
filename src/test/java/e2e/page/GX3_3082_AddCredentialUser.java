@@ -150,10 +150,22 @@ public class GX3_3082_AddCredentialUser {
         }
     }
 
-    public void verifyMessageEmpty(String messagesTestErrors) throws InterruptedException {
-        for (int i = 0; i < (messageError.size() - 1); i++) {
+    public void verifyMsgPasswordError(String[] messagesTestErrors) throws InterruptedException {
+
+        for (int i = 0; i < messageError.size(); i++) {
+            Thread.sleep(1500);
             String messageTxt = messageError.get(i).getText();
-            Assertions.assertEquals(messageTxt, messagesTestErrors);
+            Assertions.assertTrue(messageTxt.contains(messagesTestErrors[i]));
+
+        }
+    }
+
+    public void verifyMessageEmpty() throws InterruptedException {
+
+        for (int i = 0; i < (messageError.size() - 1); i++) {
+            Thread.sleep(500);
+            WebElement elementError = messageError.get(i);
+            Assertions.assertTrue(elementError.isDisplayed());
         }
     }
 

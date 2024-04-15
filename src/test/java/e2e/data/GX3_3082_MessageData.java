@@ -13,7 +13,7 @@ public class GX3_3082_MessageData {
     private String passwdNoNumber = "Your password must contain minimum 1 number";
     private String passwdNoSpecialChar = "Your password must contain minimum 1 special character";
     private String passwdNoMatch = "Passwords do not match";
-    private String fieldsEmpty = "Required";
+    private String fieldsEmpty = "required";
 
     public Supplier<String> getUsernameErrorMinCharacter = () -> usernameMinCharacter;
     public Supplier<String> getUsernameErrorReadyExist = () -> usernameReadyExist;

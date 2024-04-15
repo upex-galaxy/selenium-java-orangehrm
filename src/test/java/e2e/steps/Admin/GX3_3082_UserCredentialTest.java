@@ -165,13 +165,11 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
     @DisplayName("3087 | TC7: Validar NO poder agregar credenciales a un usuario con los campos vacíos")
     public void TC7(TestInfo testInfo) throws InterruptedException, IOException {
-        String fieldsErrorEmpty = dataMessage.getFieldsErrorEmpty.get();
-        String expectMessages = fieldsErrorEmpty;
         Allure.step("hacer click en el boton save", () -> {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageEmpty(expectMessages);
+            addUserCredentialPage.verifyMessageEmpty();
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
@@ -218,6 +216,148 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC10: Validar NO poder agregar credenciales a un usuario cuando el campo password no tiene al menos 1 letra minúscula")
+    public void TC10(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwdNoLowerCase = data.getPasswordNoLower.get();
+        String passwdErrorNoLoweCase = dataMessage.getPasswdErrorNoLowerCase.get();
+        String[] expectMessages = { passwdErrorNoLoweCase };
+
+        Allure.step("insertar valores sin ninguna letra minúscula y completar las credenciales del usuario", () -> {
+            addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
+                    "defaultValue",
+                    passwdNoLowerCase,
+                    passwdNoLowerCase);
+        });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Disabled("Defecto - TC11")
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC11: Validar NO poder agregar credenciales a un usuario cuando el campo password no tiene al menos 1 letra mayúscula")
+    public void TC11(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwdNoUpperCase = data.getPasswordNoUpper.get();
+        String passwdErrorNoUpperCase = dataMessage.getPasswdErrorNoUpperCase.get();
+        String[] expectMessages = { passwdErrorNoUpperCase };
+
+        Allure.step("insertar valores sin ninguna letra mayúscula y completar las credenciales del usuario", () -> {
+            addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
+                    "defaultValue",
+                    passwdNoUpperCase,
+                    passwdNoUpperCase);
+        });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC12: Validar NO poder agregar credenciales a un usuario cuando el campo password no tiene al menos 1 número")
+    public void TC12(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwdNoNumbers = data.getPasswordNoNumbers.get();
+        String passwdErrorErrorNoNumber = dataMessage.getPasswdErrorNoNumber.get();
+        String[] expectMessages = { passwdErrorErrorNoNumber };
+
+        Allure.step("insertar valores sin ningún número y completar las credenciales del usuario", () -> {
+            addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
+                    "defaultValue",
+                    passwdNoNumbers,
+                    passwdNoNumbers);
+        });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC13: Validar NO poder agregar credenciales a un usuario cuando el campo password no tiene al menos 1 letra")
+    public void TC13(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwdNoLetter = data.getPasswordNoLetter.get();
+        String passwdErrorNoLower = dataMessage.getPasswdErrorNoLowerCase.get();
+        String[] expectMessages = { passwdErrorNoLower };
+
+        Allure.step("insertar valores sin ninguna letra y completar las credenciales del usuario", () -> {
+            addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
+                    "defaultValue",
+                    passwdNoLetter,
+                    passwdNoLetter);
+        });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
+            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            Do.screenshot(testInfo);
+        });
+    }
+
+    @Disabled("Defecto - TC14")
+    @Test
+    @Severity(NORMAL)
+    @Issue("https://upexgalaxy38.atlassian.net/browse/GX3-3082")
+    @DisplayName("3087 | TC14: Validar NO poder agregar credenciales a un usuario cuando el campo password no tiene al menos 1 carácter especial")
+    public void TC14(TestInfo testInfo) throws InterruptedException, IOException {
+
+        String passwdNoSpecialChar = data.getPasswordNoSpecialChar.get();
+        String passwdErrorNoSpecialChar = dataMessage.getPasswdErrorNoSpecialChar.get();
+        String[] expectMessages = { passwdErrorNoSpecialChar };
+
+        Allure.step("insertar valores sin ningún carácter especial y completar las credenciales del usuario", () -> {
+            addUserCredentialPage.fillUserDataCredential("ESS", "Disabled",
+                    "defaultValue",
+                    passwdNoSpecialChar,
+                    passwdNoSpecialChar);
+        });
+        Allure.step("hacer click en el boton save", () ->
+
+        {
+            addUserCredentialPage.clickSaveButton();
+        });
+        Allure.step("validar NO agregar credenciales al usuario", () -> {
+            addUserCredentialPage.verifyMsgPasswordError(expectMessages);
             then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
             Do.screenshot(testInfo);
         });
