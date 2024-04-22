@@ -1,10 +1,13 @@
 package e2e.page;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.function.Supplier;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import e2e.fixtures.TestBase;
 import e2e.utils.Action;
@@ -40,9 +43,17 @@ public class GX3_3082LoginPage {
 
     public void login(String username, String password) throws InterruptedException, IOException {
         driver.get(TestBase.BASE_URL);
-        Thread.sleep(2000);
+        this.waitVisibilityElement(usernameInput.get(), 1500);
+        this.waitVisibilityElement(passwordInput.get(), 1500);
         this.typeUsername(username);
         this.typePassword(password);
         this.clickSubmitButton();
+    }
+
+    public void waitVisibilityElement(WebElement element, Integer timeoutsOnMilliSecond) throws InterruptedException {
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(this.driver);
+        wait.withTimeout(Duration.ofMillis(timeoutsOnMilliSecond));
+        wait.pollingEvery(Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 }

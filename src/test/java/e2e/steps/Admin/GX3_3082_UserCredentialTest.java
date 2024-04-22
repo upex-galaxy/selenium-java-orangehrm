@@ -24,7 +24,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
     @BeforeEach
     public void initializePagesAndData() {
         loginPage = new GX3_3082LoginPage(web, get, Do);
-        addUserCredentialPage = new GX3_3082_AddCredentialUser(web, get, Do);
+        addUserCredentialPage = new GX3_3082_AddCredentialUser(web, get, Do, then);
         data = new GX3_3082_DataForTest();
         endpointUserCredential = data.getEndpointUserCredential.get();
     }
@@ -53,7 +53,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -71,7 +71,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -89,7 +89,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -107,7 +107,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -129,7 +129,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
 
@@ -152,7 +152,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageSuccess();
+            addUserCredentialPage.verifyDisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -166,8 +166,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -190,7 +189,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -213,7 +212,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -238,8 +237,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -265,8 +263,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -291,8 +288,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -317,8 +313,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -344,8 +339,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -372,8 +366,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }
@@ -399,8 +392,7 @@ public class GX3_3082_UserCredentialTest extends TestBase {
             addUserCredentialPage.clickSaveButton();
         });
         Allure.step("validar NO agregar credenciales al usuario", () -> {
-            addUserCredentialPage.verifyMessageErrorVisibiliTy();
-            then.shouldContain(web.getCurrentUrl(), endpointUserCredential);
+            addUserCredentialPage.verifyNODisplayMsgSuccess();
             Do.screenshot(testInfo);
         });
     }

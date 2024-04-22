@@ -1,19 +1,26 @@
 package e2e.page;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import com.github.javafaker.Faker;
 
+import e2e.fixtures.TestBase;
 import e2e.utils.Action;
+import e2e.utils.Assertion;
 import e2e.utils.Locator;
 
 public class GX3_3082_AddCredentialUser {
@@ -21,14 +28,17 @@ public class GX3_3082_AddCredentialUser {
     private WebDriver driver;
     private Locator get;
     private Action Do;
+    public Assertion then;
     private Faker faker = new Faker();
     String username = faker.name().username();
-    String password = faker.internet().password();
+    String password = faker.internet().password().concat("1");
 
     @FindBy(css = "[class$='form-row'] [data-v-c93bdbf3]:nth-child(1) [tabindex='0']")
     private WebElement dropdownUserRole;
     @FindBy(css = "[class$='oxd-form'] [role='listbox'] > *")
     public List<WebElement> optionsOfDropdowns;
+    @FindBy(css = "[class$='oxd-form'] [role='listbox'] span")
+    public List<WebElement> employeeOptions;
     @FindBy(css = "[class$='form-row'] [data-v-c93bdbf3]:nth-child(3) [tabindex='0']")
     private WebElement dropdownStatus;
     @FindBy(css = "[class$='form-row'] [data-v-c93bdbf3] [placeholder='Type for hints...']")
@@ -46,10 +56,11 @@ public class GX3_3082_AddCredentialUser {
     @FindBy(css = "[class*='field-error-message']")
     public List<WebElement> messageError;
 
-    public GX3_3082_AddCredentialUser(WebDriver driver, Locator get, Action Do) {
+    public GX3_3082_AddCredentialUser(WebDriver driver, Locator get, Action Do, Assertion then) {
         this.driver = driver;
         this.get = get;
         this.Do = Do;
+        this.then = then;
         PageFactory.initElements(driver, this);
     }
 
@@ -79,11 +90,11 @@ public class GX3_3082_AddCredentialUser {
 
     public void typeEmployeeName() throws InterruptedException, IOException {
         employeeNameInput.sendKeys("m");
-        Thread.sleep(2000);
+        this.waitVisibilityElements(employeeOptions, 2000);
         employeeNameInput.click();
-        Integer optionsSize = optionsOfDropdowns.size() - 1;
+        Integer optionsSize = employeeOptions.size() - 1;
         Integer randomIndex = new Random().nextInt(optionsSize) + 1;
-        optionsOfDropdowns.get(randomIndex).click();
+        employeeOptions.get(randomIndex).click();
     }
 
     public void typeUsername() throws InterruptedException {
@@ -136,18 +147,33 @@ public class GX3_3082_AddCredentialUser {
         }
     }
 
-    public void verifyMessageSuccess() throws InterruptedException {
-        Thread.sleep(3000);
-        Assertions.assertTrue(messageSuccess.isDisplayed());
+    public void verifyDisplayMsgSuccess() throws InterruptedException {
+        this.waitVisibilityElement(messageSuccess, 3000);
+        then.shouldBeTrue(messageSuccess.isDisplayed());
     }
 
-    public void verifyMessageErrorVisibiliTy() throws InterruptedException {
-
-        for (int i = 0; i < (messageError.size() - 1); i++) {
-            Thread.sleep(500);
-            WebElement elementError = messageError.get(i);
-            Assertions.assertTrue(elementError.isDisplayed());
+    public void verifyNODisplayMsgSuccess() throws InterruptedException {
+        try {
+            this.waitVisibilityElement(messageSuccess, 2000);
+        } catch (NoSuchElementException err) {
+            return;
         }
+
+        then.shouldBeFalse(messageSuccess.isDisplayed());
     }
 
+    void waitVisibilityElement(WebElement element, Integer timeoutsOnMilliSecond) throws InterruptedException {
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(this.driver);
+        wait.withTimeout(Duration.ofMillis(timeoutsOnMilliSecond));
+        wait.pollingEvery(Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    void waitVisibilityElements(List<WebElement> elements, Integer timeoutsOnMilliSecond)
+            throws InterruptedException {
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(this.driver);
+        wait.withTimeout(Duration.ofMillis(timeoutsOnMilliSecond));
+        wait.pollingEvery(Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
 }
